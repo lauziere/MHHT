@@ -53,9 +53,11 @@ The tree depth *N* defines how many future frames are considered to yield tracks
 Both Murty's algorithm (\[1\], \[2\]) and the Binary Tree Partition algorithm (\[3\], \[4\]) are contained in this repository. Either can be used to generate the *K* best solutions to the GNN linear program with gates. Murty's algorithm is generally faster, but may not return *K* unique solutions to the augmented linear program from \[5\], whereas the BTP algorithm will always return *K* unique solutions. 
 
 ### Start frame & End frame
-		  	pre-Q			post-Q
-Embryo1	2415-35099		35100-53968			
-Embryo2	0-29660			N/A
+
+|         | Pre-Q           | Post-Q  |
+| ------------- |:-------------:| -----:|
+| Embryo1     | 2415-35099 | 35100-53968 |
+| Embryo2      | 0-29660	      |   N/A |
 
 Annotations for Embryo1 begin at image number 2415, while annotations begin immediately for Embryo2. However, the *Q* cell split (20 to 22 cells) is not recorded in Embryo2. StartFrame and EndFrame must be within the annotated ranges above. 
 
