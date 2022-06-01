@@ -50,7 +50,7 @@ The tree depth *N* defines how many future frames are considered to yield tracks
 
 ### K best solver: Miller, Stone, and Cox's optimized Murty algorithm ('MSC'), Murty's algorithm ('Murty'), or Binary Tree Partition ('BTP')
 
-Both Murty's algorithm (\[1\], \[2\]) and Miller, Stone, and Cox's optimized version are included. The Binary Tree Partition algorithm (\[5\], \[6\]) is also implemented here. Either of the three can be used to generate the *K* best solutions to the GNN linear program with gates. The optimized Murty's algorithm is generally faster than Murty's original algorithm and will also return *K* unique solutions to the augmented linear program from \[7\], whereas Murty's original algorithm may not. The BTP algorithm will always return *K* unique solutions as well. 
+Both Murty's algorithm (\[1\], \[2\]) and Miller, Stone, and Cox's (\[3\], \[4\], \[5\]) optimized version are included. The Binary Tree Partition algorithm (\[6\], \[7\]) is also implemented here. Either of the three can be used to generate the *K* best solutions to the GNN linear program with gates. The optimized Murty's algorithm is generally faster than Murty's original algorithm and will also return *K* unique solutions to the augmented linear program from \[8\], whereas Murty's original algorithm may not. The BTP algorithm will always return *K* unique solutions as well. 
 
 ### Start frame & End frame
 
@@ -81,10 +81,12 @@ Retrieved from <http://www.jstor.org/stable/168595>
 
 \[4\] Crouse, David F. "On implementing 2D rectangular assignment algorithms." IEEE Transactions on Aerospace and Electronic Systems 52.4 (2016): 1679-1696.
 
-\[5\] Seyed Hamid Rezatofighi, Anton Milan, Zhen Zhang, Qinfeng Shi, Anthony Dick, and Ian Reid. Joint Proba- bilistic Data Association Revisited. In 2015 IEEE International Conference on Computer Vision (ICCV), pages 3047–3055, Santiago, Chile, December 2015. IEEE. ISBN 978-1-4673-8391-2. doi: 10.1109/ICCV.2015.349. URL http://ieeexplore.ieee.org/document/7410706/.
+\[5\] https://github.com/USNavalResearchLaboratory/TrackerComponentLibrary/tree/master/Assignment_Algorithms/k-Best_2D_Assignment
 
-\[6\] http://www.milanton.de/#publications
+\[6\] Seyed Hamid Rezatofighi, Anton Milan, Zhen Zhang, Qinfeng Shi, Anthony Dick, and Ian Reid. Joint Proba- bilistic Data Association Revisited. In 2015 IEEE International Conference on Computer Vision (ICCV), pages 3047–3055, Santiago, Chile, December 2015. IEEE. ISBN 978-1-4673-8391-2. doi: 10.1109/ICCV.2015.349. URL http://ieeexplore.ieee.org/document/7410706/.
 
-\[7\] Khuloud Jaqaman, Dinah Loerke, Marcel Mettlen, Hirotaka Kuwata, Sergio Grinstein, Sandra L. Schmid, and Gaudenz Danuser. Robust single-particle tracking in live-cell time-lapse sequences. Nature Methods, 5(8):695– 702, August 2008. ISSN 1548-7105. doi: 10.1038/nmeth.1237. URL https://www.nature.com/articles/ nmeth.1237. Number: 8 Publisher: Nature Publishing Group.
+\[7\] http://www.milanton.de/#publications
+
+\[8\] Khuloud Jaqaman, Dinah Loerke, Marcel Mettlen, Hirotaka Kuwata, Sergio Grinstein, Sandra L. Schmid, and Gaudenz Danuser. Robust single-particle tracking in live-cell time-lapse sequences. Nature Methods, 5(8):695– 702, August 2008. ISSN 1548-7105. doi: 10.1038/nmeth.1237. URL https://www.nature.com/articles/ nmeth.1237. Number: 8 Publisher: Nature Publishing Group.
 
 
