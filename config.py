@@ -7,13 +7,13 @@ config = {}
 Dataset = 'Embryo1'
 
 # Detection method: 'Annotations', '3D-UNet', or 'IFT-Watershed'
-Detection = '3D-UNet'
+Detection = 'Annotations'
 
 # Interpolation method: 'Last' or 'Graph'
 Interpolation = 'Graph'
 
 # Interpolation cost. Default is the gate size d.
-Interpolation_cost = 12.5
+Interpolation_cost = 5.0
 
 # Gate: d (microns): 
 d = 7.5
@@ -27,7 +27,7 @@ K = 25
 # Search depth N:
 N = 2
 
-# K best solver: Murty's algorithm ('Murty') or Binary Tree Partition ('BTP')
+# K best solver: Miller, Stone, and Cox's optimized Murty algorithm ('MSC'), Murty's algorithm ('Murty'), or Binary Tree Partition ('BTP').
 Solver = 'Murty'
 
 # Start frame & End frame

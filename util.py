@@ -5,8 +5,11 @@ import time
 import pandas as pd
 
 from murty import *
+from MSC import *
 from BTP import *
 from plotting import *
+
+import pdb
 
 def Embryo_graph(n):
     
@@ -434,6 +437,125 @@ class MHHT_Murty(MHHT):
         for k in range(num_hyps): 
         
             chosen_cols = hyps[k]
+
+            out_array_interp = self.interpolate(in_array_aug, out_array_aug, chosen_cols)
+
+            self.inter_arrays[j+1] = out_array_interp
+
+            if j == 0:
+                self.final_arrays[k] = out_array_interp
+
+            this_step_cost = self.get_total_assignment_cost(j, C, chosen_cols)
+
+            self.cost.append(this_step_cost)
+            self.order.append(k)
+
+            j += 1
+            
+            if j < self.N_scan and sum(self.cost) < self.best_cost:
+
+                self.search(j)
+
+            if j == self.N_scan and sum(self.cost) < self.best_cost:
+
+                fc = sum(self.cost)
+                
+                if fc < self.best_cost:
+
+                    self.best_cost = fc
+                    self.final_order = self.order.copy()
+
+            j+= -1
+            self.cost.pop()
+            self.order.pop()
+
+class MHHT_MSC(MHHT):
+
+    def __init__(self, config):
+
+        MHHT.__init__(self, config)
+
+    def interpolate(self, in_array_aug, out_array, chosen_cols):
+
+        adj = self.adj
+        n2 = out_array.shape[0]
+
+        found_nuclei = np.argwhere(chosen_cols < n2)[:,0] # of assigned points, which are actual nuclei
+        missing_nuclei = np.argwhere(chosen_cols >= n2)[:,0] # of assigned points, which are missed nuclei
+        num_missing = missing_nuclei.shape[0] 
+        
+        if self.Interpolation == 'Last':
+            
+            # Use last point. 
+            interp_points = {z:in_array_aug[z] for z in missing_nuclei}
+                  
+        elif self.Interpolation == 'Graph':
+            
+            interp_points = {}
+
+            for z in missing_nuclei:
+
+                last_pos = in_array_aug[z]
+
+                used_nuclei = np.concatenate([np.nonzero(adj[z,:])[0], np.nonzero(adj[:,z])[0]])
+                used_found_nuclei = np.intersect1d(found_nuclei, used_nuclei)
+                num_used_found_nuclei = used_found_nuclei.shape[0]
+
+                if num_used_found_nuclei > 0:
+
+                    preds = np.empty((num_used_found_nuclei, 3))
+
+                    for y in range(num_used_found_nuclei):
+                            
+                        nuc = used_found_nuclei[y]
+
+                        last_nuc = in_array_aug[nuc]
+                        this_nuc = out_array[chosen_cols[nuc]]
+
+                        this_pred = this_nuc - (last_nuc - last_pos)
+
+                        preds[y] = this_pred
+
+                    pred_pos = preds.mean(axis=0)
+                    
+                    interp_points[z] = pred_pos
+
+                elif num_used_found_nuclei == 0:
+
+                    interp_points[z] = in_array_aug[z]
+        
+        # Update out_array
+        out_array_interp = np.empty((self.n, 3))
+        for z in range(self.n):
+            
+            pred_col = chosen_cols[z]
+            
+            # if missing:
+            if pred_col >= n2:
+                
+                # use interpolated. 
+                out_array_interp[z] = interp_points[z]
+            
+            elif pred_col < n2:
+                
+                out_array_interp[z] = out_array[pred_col]
+
+        return out_array_interp
+
+    def search(self, j):
+
+        in_array_aug = self.inter_arrays[j]
+        out_array_aug = self.Predictions[self.CurrentFrame  - self.InitialFrame + j + 1] 
+
+        C = Murty_mat_MSC(in_array_aug, out_array_aug, self.d)
+        costs, rows_K, cols_K = Murty_MSC(C, self.K)
+
+        # hyps = get_unique_hyps(cols_K, self.n)
+        # num_hyps = hyps.shape[0]
+        
+        for k in range(self.K): 
+        
+            chosen_cols = cols_K[k]
 
             out_array_interp = self.interpolate(in_array_aug, out_array_aug, chosen_cols)
 
