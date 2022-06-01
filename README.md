@@ -48,9 +48,9 @@ Unary models 'GNN' and 'MHT' are able to be performed in the MHHT framework. The
 
 The tree depth *N* defines how many future frames are considered to yield tracks at the current frame. *N*=1 is a standard frame-to-frame tracking approach. Using future frames improves performance but causes exponential increases in computation. 
 
-### K best solver: Murty's algorithm ('Murty') or Binary Tree Partition ('BTP')
+### K best solver: Miller, Stone, and Cox's optimized Murty algorithm ('MSC'), Murty's algorithm ('Murty'), or Binary Tree Partition ('BTP')
 
-Both Murty's algorithm (\[1\], \[2\]) and the Binary Tree Partition algorithm (\[3\], \[4\]) are contained in this repository. Either can be used to generate the *K* best solutions to the GNN linear program with gates. Murty's algorithm is generally faster, but may not return *K* unique solutions to the augmented linear program from \[5\], whereas the BTP algorithm will always return *K* unique solutions. 
+Both Murty's algorithm (\[1\], \[2\]) and Miller, Stone, and Cox's optimized version are included. The Binary Tree Partition algorithm (\[5\], \[6\]) is also implemented here. Either of the three can be used to generate the *K* best solutions to the GNN linear program with gates. The optimized Murty's algorithm is generally faster than Murty's original algorithm and will also return *K* unique solutions to the augmented linear program from \[7\], whereas Murty's original algorithm may not. The BTP algorithm will always return *K* unique solutions as well. 
 
 ### Start frame & End frame
 
@@ -77,10 +77,14 @@ Retrieved from <http://www.jstor.org/stable/168595>
 
 \[2\] https://github.com/arg0naut91/muRty
 
-\[3\] Seyed Hamid Rezatofighi, Anton Milan, Zhen Zhang, Qinfeng Shi, Anthony Dick, and Ian Reid. Joint Proba- bilistic Data Association Revisited. In 2015 IEEE International Conference on Computer Vision (ICCV), pages 3047–3055, Santiago, Chile, December 2015. IEEE. ISBN 978-1-4673-8391-2. doi: 10.1109/ICCV.2015.349. URL http://ieeexplore.ieee.org/document/7410706/.
+\[3\] Miller, M. L., et al. “Optimizing Murty’s Ranked Assignment Method.” IEEE Transactions on Aerospace and Electronic Systems, vol. 33, no. 3, July 1997, pp. 851–62.
 
-\[4\] http://www.milanton.de/#publications
+\[4\] Crouse, David F. "On implementing 2D rectangular assignment algorithms." IEEE Transactions on Aerospace and Electronic Systems 52.4 (2016): 1679-1696.
 
-\[5\] Khuloud Jaqaman, Dinah Loerke, Marcel Mettlen, Hirotaka Kuwata, Sergio Grinstein, Sandra L. Schmid, and Gaudenz Danuser. Robust single-particle tracking in live-cell time-lapse sequences. Nature Methods, 5(8):695– 702, August 2008. ISSN 1548-7105. doi: 10.1038/nmeth.1237. URL https://www.nature.com/articles/ nmeth.1237. Number: 8 Publisher: Nature Publishing Group.
+\[5\] Seyed Hamid Rezatofighi, Anton Milan, Zhen Zhang, Qinfeng Shi, Anthony Dick, and Ian Reid. Joint Proba- bilistic Data Association Revisited. In 2015 IEEE International Conference on Computer Vision (ICCV), pages 3047–3055, Santiago, Chile, December 2015. IEEE. ISBN 978-1-4673-8391-2. doi: 10.1109/ICCV.2015.349. URL http://ieeexplore.ieee.org/document/7410706/.
+
+\[6\] http://www.milanton.de/#publications
+
+\[7\] Khuloud Jaqaman, Dinah Loerke, Marcel Mettlen, Hirotaka Kuwata, Sergio Grinstein, Sandra L. Schmid, and Gaudenz Danuser. Robust single-particle tracking in live-cell time-lapse sequences. Nature Methods, 5(8):695– 702, August 2008. ISSN 1548-7105. doi: 10.1038/nmeth.1237. URL https://www.nature.com/articles/ nmeth.1237. Number: 8 Publisher: Nature Publishing Group.
 
 
